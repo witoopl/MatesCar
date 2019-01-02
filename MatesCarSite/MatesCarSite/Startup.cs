@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using MatesCarSite;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MatesCarSite
 {
@@ -17,17 +20,17 @@ namespace MatesCarSite
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            IoCContainer.Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             //Add applicationDbContext to DI
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection")));
 
             //AddIdentity adds coockie based authentication
             //Adds scoped classes for things like UserManger, SignInMananger, PasswordHashers etc...
@@ -41,6 +44,22 @@ namespace MatesCarSite
                 //Adds a provider that generates unique keys and hashes for things like
                 // forgot password links, phone number verification codes etc...
                 .AddDefaultTokenProviders();
+
+            //Add JWT Authentication for api clients
+            services.AddAuthentication().
+                AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = IoCContainer.Configuration["Jwt:Issuer"],
+                        ValidAudience = IoCContainer.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(IoCContainer.Configuration["Jwt:SecretKey"])),
+                    };
+                });
 
             //Change password policy
             services.Configure<IdentityOptions>(options =>
@@ -59,7 +78,7 @@ namespace MatesCarSite
             {
                 //Redirect to /login
                 options.LoginPath = "/login";
-                options.DataProtectionProvider = DataProtectionProvider.Create("Test");
+                //options.DataProtectionProvider = DataProtectionProvider.Create("Test");
                 //Change cookie timeout to expire in 5 days
                 options.ExpireTimeSpan = TimeSpan.FromDays(5);
                
@@ -67,7 +86,13 @@ namespace MatesCarSite
             
 
 
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.InputFormatters.Add(new XmlSerializerInputFormatter());
+                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
