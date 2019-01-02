@@ -1,5 +1,6 @@
 ﻿using MatesCarSite;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MatesCarSite.Controllers
-{
+{ 
+    
+    /// <summary>
+    /// Manages the standard web server pages
+    /// </summary>
     public class HomeController : Controller
     {
         #region Protected Members
@@ -92,12 +97,13 @@ namespace MatesCarSite.Controllers
         /// Private area no peeking.
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Route("private")]
         public IActionResult Private()
         {
             return Content($"This is a private area. Welcome {HttpContext.User.Identity.Name}", "text/html");
         }
+
         [Route("logout")]
         public async Task<IActionResult> SignOutAsync()
         {
@@ -117,6 +123,7 @@ namespace MatesCarSite.Controllers
             //Sign out any previous sessions
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
 
+            
             // Sign user with the valid credentials
             var result = await mSignInManager.PasswordSignInAsync("Witold", "password", true, false);
             //If succesfull...
@@ -134,5 +141,10 @@ namespace MatesCarSite.Controllers
             return Content("Failed to login", "text/html");
         }
 
+        [Route("test")]
+        public SettingsDataModel Test(SettingsDataModel model)
+        {
+            return new SettingsDataModel { Id = "some id", Name = "Luke", Value = "10" };
+        }
     }
 }
