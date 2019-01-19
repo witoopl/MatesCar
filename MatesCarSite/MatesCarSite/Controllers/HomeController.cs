@@ -97,7 +97,7 @@ namespace MatesCarSite.Controllers
         /// Private area no peeking.
         /// </summary>
         /// <returns></returns>
-        
+        [Authorize]
         [Route("private")]
         public IActionResult Private()
         {
