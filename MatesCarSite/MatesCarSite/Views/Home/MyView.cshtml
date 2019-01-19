@@ -3,18 +3,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <title>Index</title>
 </head>
 <body>
 
     <h1>YEET</h1>
     <h2>OUT OF THE BED</h2>
-    @ViewBag.Greeting World (from the view)
-    <p>
-        We're going to have an exciting party.
-        <br />
-        (To do: sell it better. Add pictures or something.)
-    </p>
-    <a asp-action="RsvpForm">RSVP Now</a>
+    <div class="text-center">
+        <h3>We're going to have an exciting party</h3>
+        <h4>And you're invited</h4>
+        <a class="btn btn-primary" asp-action="RsvpForm">RSVP Now</a>
+    </div>
 </body>
 </html>
