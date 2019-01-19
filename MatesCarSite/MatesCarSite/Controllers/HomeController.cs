@@ -1,17 +1,15 @@
-﻿using MatesCarSite;
+﻿using MatesCarSite.Models;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MatesCarSite.Models;
 
 namespace MatesCarSite.Controllers
-{ 
-    
+{
+
     /// <summary>
     /// Manages the standard web server pages
     /// </summary>
