@@ -97,7 +97,7 @@ namespace MatesCarSite.Controllers
         /// Private area no peeking.
         /// </summary>
         /// <returns></returns>
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        
         [Route("private")]
         public IActionResult Private()
         {

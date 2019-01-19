@@ -45,22 +45,7 @@ namespace MatesCarSite
                 // forgot password links, phone number verification codes etc...
                 .AddDefaultTokenProviders();
 
-            //Add JWT Authentication for api clients
-            services.AddAuthentication().
-                AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = IoCContainer.Configuration["Jwt:Issuer"],
-                        ValidAudience = IoCContainer.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(IoCContainer.Configuration["Jwt:SecretKey"])),
-                    };
-                });
-
+           
             //Change password policy
             services.Configure<IdentityOptions>(options =>
             {
