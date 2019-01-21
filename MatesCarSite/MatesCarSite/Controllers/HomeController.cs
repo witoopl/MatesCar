@@ -45,7 +45,7 @@ namespace MatesCarSite.Controllers
         }
         #endregion 
 
-        public IActionResult Index()
+        public IActionResult NotIndex()
         {  
 
             mContexct.Database.EnsureCreated();
@@ -146,7 +146,7 @@ namespace MatesCarSite.Controllers
         {
             return new SettingsDataModel { Id = "some id", Name = "Luke", Value = "10" };
         }
-        public ViewResult NotIndex()
+        public ViewResult Index()
         {
             int hour = DateTime.Now.Hour;
             ViewBag.Greeting = hour < 12 ? "Good Morning" : "Good Afternoon";

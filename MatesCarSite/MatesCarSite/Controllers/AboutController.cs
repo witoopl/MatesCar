@@ -11,7 +11,7 @@ namespace MatesCarSite.Controllers
 
         public IActionResult TellMeMore(string moreInfo = "")
         {
-            return new JsonResult(new { name = "TellmeMore", content = moreInfo });
+           // return new JsonResult(new { name = "TellmeMore", content = moreInfo });
             return View();
         }
 
