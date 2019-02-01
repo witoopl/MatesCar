@@ -20,7 +20,7 @@
     <Content Update="Views\About\TellMeMore.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Views\About\Index.cshtml">
+    <Content Update="Views\Home\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Home\Error.cshtml">

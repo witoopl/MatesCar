@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using MatesCarSite.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -11,7 +12,11 @@ namespace MatesCarSite
     {
 
         #region Public properties
-        public DbSet<SettingsDataModel> Settings { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Debt> Debts { get; set; }
+
+        public DbSet<Road> Roads { get; set; }
+        public DbSet<Route> Routes { get; set; }
         #endregion
 
         #region Constructor
@@ -31,7 +36,7 @@ namespace MatesCarSite
 
             //Fluent API
 
-            modelBuilder.Entity<SettingsDataModel>().HasIndex(a => a.Name);
+           // modelBuilder.Entity<SettingsDataModel>().HasIndex(a => a.Name);
         }
     }
 }

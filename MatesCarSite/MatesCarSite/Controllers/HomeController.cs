@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,29 +46,7 @@ namespace MatesCarSite.Controllers
         }
         #endregion 
 
-        public IActionResult NotIndex()
-        {  
-
-            mContexct.Database.EnsureCreated();
-
-            if (mContexct.Settings.Any())
-            {
-                mContexct.Settings.Add(new SettingsDataModel
-                {
-                    Name = "BackgroundColor",
-                    Value = "Red"
-                });
-                var numberOfSettings = mContexct.Settings.Local.Count();
-
-                var firstSettings = mContexct.Settings.First();
-
-                mContexct.SaveChanges();
-            }
-            
-
-
-            return View();
-        }
+        
         public IActionResult Error()
         {
             return View();
@@ -148,9 +127,9 @@ namespace MatesCarSite.Controllers
         }
         public ViewResult Index()
         {
-            int hour = DateTime.Now.Hour;
-            ViewBag.Greeting = hour < 12 ? "Good Morning" : "Good Afternoon";
-            return View("MyView");
+            return View(new Dictionary<string, object>{
+                ["ThisIsKeyString"] = "ThisIsObjectValue",
+            });
         }
         [HttpGet]
         public ViewResult RsvpForm()
