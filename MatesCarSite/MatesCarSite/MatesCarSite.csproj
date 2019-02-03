@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.0.0" />
+    <PackageReference Include="GitHub" Version="1.13.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
     

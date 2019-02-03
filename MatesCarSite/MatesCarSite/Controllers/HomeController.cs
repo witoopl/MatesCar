@@ -44,9 +44,17 @@ namespace MatesCarSite.Controllers
             mUserManager = userManager;
             mSignInManager = signInManager;
         }
-        #endregion 
+        #endregion
+        #region Actions
 
-        
+        [Authorize]
+        public ViewResult Index()
+        {
+            return View(new Dictionary<string, object>
+            {
+                ["ThisIsKeyString"] = "ThisIsObjectValue",
+            });
+        }
         public IActionResult Error()
         {
             return View();
@@ -70,7 +78,6 @@ namespace MatesCarSite.Controllers
 
             return Content("User creation failed", "text/html");
         }
-
 
         /// <summary>
         /// Private area no peeking.
@@ -125,12 +132,7 @@ namespace MatesCarSite.Controllers
         {
             return new SettingsDataModel { Id = "some id", Name = "Luke", Value = "10" };
         }
-        public ViewResult Index()
-        {
-            return View(new Dictionary<string, object>{
-                ["ThisIsKeyString"] = "ThisIsObjectValue",
-            });
-        }
+        
         [HttpGet]
         public ViewResult RsvpForm()
         {
@@ -155,5 +157,7 @@ namespace MatesCarSite.Controllers
         {
             return View(Repository.Responses.Where(r => r.WillAttend == true));
         }
+
+        #endregion
     }
 }

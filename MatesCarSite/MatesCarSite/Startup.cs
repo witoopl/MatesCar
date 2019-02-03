@@ -55,11 +55,11 @@ namespace MatesCarSite
             //Alter application cookie info
             services.ConfigureApplicationCookie(options =>
             {
-                //Redirect to /login
-                options.LoginPath = "/login";
+                //Redirect to users/login
+                //options.LoginPath = "/Users/login";
                 //options.DataProtectionProvider = DataProtectionProvider.Create("Test");
                 //Change cookie timeout to expire in 5 days
-                options.ExpireTimeSpan = TimeSpan.FromDays(5);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(120);
                
             });
             

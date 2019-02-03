@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MatesCarSite.Models;
 using MatesCarSite.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,7 @@ namespace MatesCarSite.Controllers
         #endregion
 
         #region Actions
+        
         public IActionResult Index() => View(userManager.Users);
 
         public ViewResult Create() => View();
