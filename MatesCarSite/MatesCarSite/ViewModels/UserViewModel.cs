@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MatesCarSite.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MatesCarSite.ViewModels
 {
@@ -30,5 +33,21 @@ namespace MatesCarSite.ViewModels
         [Required]
         [UIHint("password")]
         public string Password { get; set; }
+    }
+
+    public class RoleEditModel
+    {
+        public IdentityRole Role { get; set; }
+        public IEnumerable<ApplicationUser> Members { get; set; }
+        public IEnumerable<ApplicationUser> NonMembers { get; set; }
+    }
+
+    public class RoleModificationModel
+    {
+        [Required]
+        public string RoleName { get; set; }
+        public string RoleId { get; set; }
+        public string[] IdsToAdd { get; set; }
+        public string[] IdsToDelete { get; set; }
     }
 }
