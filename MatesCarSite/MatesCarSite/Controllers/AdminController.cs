@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MatesCarSite.Controllers
 {
+    [Authorize(Roles = "Admins")]
     public class AdminController : Controller
     {
         #region Private members/local variables

@@ -82,30 +82,23 @@ namespace MatesCarSite
 
             //Setup identity
             app.UseAuthentication();
+            //use wwwroot files
+            app.UseStaticFiles();
+            //use default routes
+            app.UseMvcWithDefaultRoute();
+            app.UseStatusCodePages();
 
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseBrowserLink();
             }
 
-            app.UseStaticFiles();
-
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{moreInfo?}");
-
-                routes.MapRoute(
-                    name: "aboutPage",
-                    template: "more",
-                    defaults: new { controller = "About", action = "TellMeMore" });
-            });
+            ApplicationDbContext.CreateAdminAccount(serviceProvider, IoCContainer.Configuration).Wait();
+            
         }
     }
 }

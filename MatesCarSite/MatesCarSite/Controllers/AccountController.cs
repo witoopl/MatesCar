@@ -34,6 +34,7 @@ namespace MatesCarSite.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
+            //TODO: securing redirection to logout
             ViewBag.returnUrl = returnUrl;
             return View();
         }
@@ -60,6 +61,19 @@ namespace MatesCarSite.Controllers
                 ModelState.AddModelError(nameof(LoginModel.Email), "Invalid user or passowrd");
             }
             return View(details);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
         #endregion
 

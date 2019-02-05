@@ -47,14 +47,14 @@ namespace MatesCarSite.Controllers
         #endregion
         #region Actions
 
-        [Authorize]
-        public ViewResult Index()
-        {
-            return View(new Dictionary<string, object>
-            {
-                ["ThisIsKeyString"] = "ThisIsObjectValue",
-            });
-        }
+        [AllowAnonymous]
+        public ViewResult Index() => View(GetData(nameof(Index)));
+
+        [Authorize(Roles = "Admin,Admins")]
+        public IActionResult OtherAction() => View("Index", GetData(nameof(OtherAction)));
+
+        
+
         public IActionResult Error()
         {
             return View();
@@ -157,6 +157,19 @@ namespace MatesCarSite.Controllers
         {
             return View(Repository.Responses.Where(r => r.WillAttend == true));
         }
+
+        #endregion
+        #region Helper functions
+
+        private Dictionary<string, object> GetData(string actionName) =>
+            new Dictionary<string, object>
+            {
+                ["Action"] = actionName,
+                ["User"] = HttpContext.User.Identity.Name,
+                ["Autheticated"] = HttpContext.User.Identity.IsAuthenticated,
+                ["Auth Type"] = HttpContext.User.Identity.AuthenticationType,
+                ["In Users Role"] = HttpContext.User.IsInRole("Users")
+            };
 
         #endregion
     }

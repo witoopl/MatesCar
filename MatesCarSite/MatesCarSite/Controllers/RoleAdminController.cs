@@ -5,11 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using MatesCarSite.Models;
 using MatesCarSite.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatesCarSite.Controllers
 {
+    [Authorize(Roles = "Admins")]
     public class RoleAdminController : Controller
     {
         #region Private members
