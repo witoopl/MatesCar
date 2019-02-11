@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Route>
+
+
+<table class="table table-sm">
+    <tr>
+        @if (Model.Count() != 0)
+        {
+            @foreach (var route in Model)
+            {
+
+
+                <td>@route.StartLocation</td>
+                <td>@route.EndLocation</td>
+                <td>@route.ChargeForPassenger</td>
+                <td>@route.IsFullyPaid</td>
+                <td>@route.NonAppPassengers</td>
+
+
+            }
+        }
+        else
+        {
+            <td>There is no Routes yet for @User.Identity.Name</td>
+        }
+    </tr>
+
+</table>

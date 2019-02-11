@@ -50,4 +50,5 @@ namespace MatesCarSite.ViewModels
         public string[] IdsToAdd { get; set; }
         public string[] IdsToDelete { get; set; }
     }
+
 }

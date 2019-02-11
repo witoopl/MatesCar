@@ -24,8 +24,18 @@ namespace MatesCarSite
         {
             //Add applicationDbContext to DI
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection")));
+            {
+                //if (env.IsDevelopment())
+                    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DevelopmentConnection"));
+                //else
+                //    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection"));
+                Infrastructure.GetAllEvsClass.zasadyAplikacji = Environment.GetEnvironmentVariables();
+            });
+            
+            
+            
 
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
             //AddIdentity adds coockie based authentication
             //Adds scoped classes for things like UserManger, SignInMananger, PasswordHashers etc...
             //NOTE: Atomatically adds the validated user from a cookie to the HttpContext.User
@@ -86,7 +96,12 @@ namespace MatesCarSite
             app.UseStaticFiles();
             //use default routes
             app.UseMvcWithDefaultRoute();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(name: "default", template: "{controller=Account}/{action=Login}");
+            //});
             app.UseStatusCodePages();
+            
 
             if (env.IsDevelopment())
             {

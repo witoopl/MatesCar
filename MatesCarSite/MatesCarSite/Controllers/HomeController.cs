@@ -21,7 +21,7 @@ namespace MatesCarSite.Controllers
         /// <summary>
         /// The scoped Application context
         /// </summary>
-        protected ApplicationDbContext mContexct;
+        protected ApplicationDbContext context;
 
         /// <summary>
         /// The manager for  handling user creation, deletion, searching, roles etc...
@@ -32,131 +32,48 @@ namespace MatesCarSite.Controllers
         /// The manager for handling signing in and out for our users
         /// </summary>
         protected SignInManager<ApplicationUser> mSignInManager;
+
         #endregion
         #region Constructor
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="context">The injected context</param>
-        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public HomeController(ApplicationDbContext _context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            mContexct = context;
+            context = _context;
             mUserManager = userManager;
             mSignInManager = signInManager;
         }
         #endregion
         #region Actions
 
-        [AllowAnonymous]
+        [Authorize]
         public ViewResult Index() => View(GetData(nameof(Index)));
 
         [Authorize(Roles = "Admin,Admins")]
         public IActionResult OtherAction() => View("Index", GetData(nameof(OtherAction)));
 
         
-
+        
+        /// <summary>
+        /// Redirects to this page in case some error occurs
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Error()
         {
             return View();
         }
 
-        /// <summary>
-        /// Creates out single user for now
-        /// </summary>
-        /// <returns></returns>
-        [Route("create")]
-        public async Task<IActionResult> CreateUserAsync()
+        public IActionResult Debts()
         {
-            var result = await mUserManager.CreateAsync(new ApplicationUser
-            {
-                UserName = "Witold",
-                Email = "contat@me.com"
-            }, "password");
-            if(result.Succeeded)
-                return Content("User was created", "text/html");
-
-
-            return Content("User creation failed", "text/html");
-        }
-
-        /// <summary>
-        /// Private area no peeking.
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        [Route("private")]
-        public IActionResult Private()
-        {
-            return Content($"This is a private area. Welcome {HttpContext.User.Identity.Name}", "text/html");
-        }
-
-        [Route("logout")]
-        public async Task<IActionResult> SignOutAsync()
-        {
-            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return Content("done", "text/html");
-
-        }
-
-        /// <summary>
-        /// An auto-login page for testing
-        /// </summary>
-        /// <param name="returnUrl">The url to return to if successfully logged in</param>
-        /// <returns></returns>
-        [Route("login")]
-        public async Task<IActionResult> LoginAsync(string returnUrl)
-        {
-            //Sign out any previous sessions
-            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-
+            var debtsOfUser = context.Debts.Where(debt => debt.NameOfLoanHolder.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
             
-            // Sign user with the valid credentials
-            var result = await mSignInManager.PasswordSignInAsync("Witold", "password", true, false);
-            //If succesfull...
-            if (result.Succeeded)
-            {
-                //if we have no return URL
-                if (string.IsNullOrEmpty(returnUrl))
-                    //Go to home
-                    return RedirectToAction(nameof(Index));
-                //otherwise, go to the return url
-                return Redirect(returnUrl);
-            }
-
-
-            return Content("Failed to login", "text/html");
+            return View(debtsOfUser);
         }
 
-        [Route("test")]
-        public SettingsDataModel Test(SettingsDataModel model)
-        {
-            return new SettingsDataModel { Id = "some id", Name = "Luke", Value = "10" };
-        }
         
-        [HttpGet]
-        public ViewResult RsvpForm()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ViewResult RsvpForm(GuestResponse guestResponse)
-        {
-            if (ModelState.IsValid)
-            {
-                Repository.AddResponse(guestResponse);
-                return View("Thanks", guestResponse);
-            }
-            else
-            {
-                // there is validation error
-                return View();
-            }
 
-        }
-        public ViewResult ListResponses()
-        {
-            return View(Repository.Responses.Where(r => r.WillAttend == true));
-        }
 
         #endregion
         #region Helper functions

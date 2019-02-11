@@ -16,10 +16,7 @@ namespace MatesCarSite
     {
 
         #region Public properties
-        public DbSet<Car> Cars { get; set; }
         public DbSet<Debt> Debts { get; set; }
-
-        public DbSet<Road> Roads { get; set; }
         public DbSet<Route> Routes { get; set; }
         #endregion
 

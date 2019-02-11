@@ -40,6 +40,7 @@ namespace MatesCarSite.Controllers
 
         public ViewResult Create() => View();
 
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateModel model)
         {

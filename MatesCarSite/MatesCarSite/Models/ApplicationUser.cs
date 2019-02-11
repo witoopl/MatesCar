@@ -12,11 +12,8 @@ namespace MatesCarSite.Models
     /// </summary>
     public class ApplicationUser : IdentityUser
     {
-        public Car Car { get; set; }
-        public string LastLocation { get; set; }
-        [MaxLength(32)]
+
         public string DefaultBankAccount { get; set; }
-        public bool BankAccountVerificated { get; set; } = false;
         public bool IsDriver { get; set; } = false;
 
         

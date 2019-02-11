@@ -16,6 +16,7 @@ namespace MatesCarSite.Models
         public string NameOfDebtor { get; set; }
         [Required]
         public float Value { get; set; }
+        public Route Route { get; set; }
         public ApplicationUser AssociatedUser { get; set; }
 
 

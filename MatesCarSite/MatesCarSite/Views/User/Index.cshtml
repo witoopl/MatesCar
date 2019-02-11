@@ -1,0 +1,27 @@
+﻿@model ApplicationUser
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<table>
+    <tr>
+        <td>Email</td><td>@Model.Email</td>
+    </tr>
+    <tr>
+        <td>Numer konta</td><td>@Model.DefaultBankAccount</td>
+    </tr>
+    <tr>
+        <td>Jestes kierowca</td><td>@Model.IsDriver</td>
+    </tr>
+    <tr>
+        <td>Numer telefonu</td><td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <td>Nazwa uzytkowanika</td><td>@Model.UserName</td>
+    </tr>
+    <tr>
+        <td>Twoje ID</td><td>@Model.Id</td>
+    </tr>
+    
+</table>
