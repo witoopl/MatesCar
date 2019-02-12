@@ -25,17 +25,25 @@ namespace MatesCarSite
             //Add applicationDbContext to DI
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                //if (env.IsDevelopment())
+                if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection"));
+                else
                     options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DevelopmentConnection"));
-                //else
-                //    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection"));
+
+
                 Infrastructure.GetAllEvsClass.zasadyAplikacji = Environment.GetEnvironmentVariables();
             });
-            
-            
-            
 
-            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
+
+
+
+            //Automatically perform database migration. Only when on Azure server
+            //
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
+
             //AddIdentity adds coockie based authentication
             //Adds scoped classes for things like UserManger, SignInMananger, PasswordHashers etc...
             //NOTE: Atomatically adds the validated user from a cookie to the HttpContext.User
@@ -89,30 +97,34 @@ namespace MatesCarSite
         {
             //Store instance of the DI service provider so our application can access it anywhere
             IoCContainer.Provider = (ServiceProvider)serviceProvider;
-
-            //Setup identity
-            app.UseAuthentication();
-            //use wwwroot files
-            app.UseStaticFiles();
-            //use default routes
-            app.UseMvcWithDefaultRoute();
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(name: "default", template: "{controller=Account}/{action=Login}");
-            //});
-            app.UseStatusCodePages();
-            
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseBrowserLink();
             }
 
-            ApplicationDbContext.CreateAdminAccount(serviceProvider, IoCContainer.Configuration).Wait();
+
+            //use wwwroot files
+            app.UseStaticFiles();
+
+            //Setup identity
+            app.UseAuthentication();
+
+            //use default routes
+            app.UseMvcWithDefaultRoute();
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(name: "default", template: "{controller=Account}/{action=Login}");
+            //});
+           
+
+
+            
+            //ApplicationDbContext.CreateAdminAccount(serviceProvider, IoCContainer.Configuration).Wait();
             
         }
     }

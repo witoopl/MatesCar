@@ -42,14 +42,16 @@ namespace MatesCarSite.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateModel model)
+        public async Task<IActionResult> Create(CreateUserByAdminViewModel model)
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new ApplicationUser
                 {
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    UserFirstName = model.UserFirstName,
+                    UserSurname = model.UserSurname
                 };
                 IdentityResult result = await userManager.CreateAsync(user, model.Password);
 

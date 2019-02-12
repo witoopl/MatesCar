@@ -11,9 +11,10 @@ using System;
 namespace MatesCarSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190211224538_Added_Name_and_Surname")]
+    partial class Added_Name_and_Surname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,14 +60,14 @@ namespace MatesCarSite.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("UserFirstName")
+                    b.Property<string>("UName")
+                        .IsRequired();
+
+                    b.Property<string>("USurnameName")
                         .IsRequired();
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
-
-                    b.Property<string>("UserSurname")
-                        .IsRequired();
 
                     b.HasKey("Id");
 

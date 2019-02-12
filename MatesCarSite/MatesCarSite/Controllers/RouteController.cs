@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MatesCarSite.Controllers
 {
+    [Authorize]
     public class RouteController : Controller
     {
 
@@ -30,7 +31,6 @@ namespace MatesCarSite.Controllers
             return View();
         }
 
-        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -60,7 +60,7 @@ namespace MatesCarSite.Controllers
 
             return View(routesOfUser);
         }
-
+        [AllowAnonymous]
         public IActionResult Zasady()
         {
 

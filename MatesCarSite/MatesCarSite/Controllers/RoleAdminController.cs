@@ -79,7 +79,7 @@ namespace MatesCarSite.Controllers
                 var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
                 list.Add(user);
             }
-            return View(new RoleEditModel
+            return View(new RoleMembershipViewModel
             {
                 Role = role,
                 Members = members,
@@ -88,7 +88,7 @@ namespace MatesCarSite.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(RoleModificationModel model)
+        public async Task<IActionResult> Edit(RoleEditViewModel model)
         {
             IdentityResult result;
             if(ModelState.IsValid)

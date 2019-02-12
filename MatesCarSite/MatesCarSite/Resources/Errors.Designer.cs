@@ -61,11 +61,56 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nieprawidłowy adres email.
+        /// </summary>
+        internal static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numer telefonu jest niewłaściwy.
+        /// </summary>
+        internal static string InvalidPhone {
+            get {
+                return ResourceManager.GetString("InvalidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nazwa modelu jest zbyt długa, maksymalnie 32 znaki.
         /// </summary>
         internal static string TooLongModelName {
             get {
                 return ResourceManager.GetString("TooLongModelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje imie jest zbyt długie.
+        /// </summary>
+        internal static string TooLongName {
+            get {
+                return ResourceManager.GetString("TooLongName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twoje nazwisko jest zbyt długie.
+        /// </summary>
+        internal static string TooLongSurname {
+            get {
+                return ResourceManager.GetString("TooLongSurname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika jest wymagana.
+        /// </summary>
+        internal static string UsernameIsRequired {
+            get {
+                return ResourceManager.GetString("UsernameIsRequired", resourceCulture);
             }
         }
     }

@@ -39,7 +39,7 @@ namespace MatesCarSite.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginModel details, string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel details, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace MatesCarSite.Controllers
                         return Redirect(returnUrl ?? "/");
                     }
                 }
-                ModelState.AddModelError(nameof(LoginModel.Email), "Invalid user or passowrd");
+                ModelState.AddModelError(nameof(LoginViewModel.Email), "Invalid user or passowrd");
             }
             return View(details);
         }

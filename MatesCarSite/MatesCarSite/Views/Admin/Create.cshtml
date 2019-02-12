@@ -1,4 +1,4 @@
-﻿@model CreateModel
+﻿@model CreateUserByAdminViewModel
 
 <div class="bg-primary m-1 p-1 text-white"><h4>Create User</h4></div>
 <div asp-validation-summary="All" class="text-danger"></div>
@@ -16,6 +16,16 @@
     <div class="form-group">
         <label asp-for="Password" class="control-label"></label>
         <input asp-for="Password" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="UName" class="control-label"></label>
+        <input asp-for="UName" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label asp-for="USurnameName" class="control-label"></label>
+        <input asp-for="USurnameName" class="form-control" />
 
     </div>
     <button type="submit" class="btn btn-primary">Create</button>

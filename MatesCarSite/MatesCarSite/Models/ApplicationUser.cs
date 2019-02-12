@@ -16,7 +16,12 @@ namespace MatesCarSite.Models
         public string DefaultBankAccount { get; set; }
         public bool IsDriver { get; set; } = false;
 
-        
+        [Required]
+        public string UserFirstName { get; set; }
+        [Required]
+        public string UserSurname { get; set; }
+
+
     }
 
 }

@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Nieprawidłowy adres email</value>
+  </data>
+  <data name="InvalidPhone" xml:space="preserve">
+    <value>Numer telefonu jest niewłaściwy</value>
+  </data>
   <data name="TooLongModelName" xml:space="preserve">
     <value>Nazwa modelu jest zbyt długa, maksymalnie 32 znaki</value>
+  </data>
+  <data name="TooLongName" xml:space="preserve">
+    <value>Twoje imie jest zbyt długie</value>
+  </data>
+  <data name="TooLongSurname" xml:space="preserve">
+    <value>Twoje nazwisko jest zbyt długie</value>
+  </data>
+  <data name="UsernameIsRequired" xml:space="preserve">
+    <value>Nazwa użytkownika jest wymagana</value>
   </data>
 </root>
