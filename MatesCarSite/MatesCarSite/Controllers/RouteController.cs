@@ -33,7 +33,10 @@ namespace MatesCarSite.Controllers
 
         public IActionResult Create()
         {
-            return View();
+
+            return View(new Route {
+                Passengers = context.Users.ToList()
+            });
         }
         [HttpPost]
         public async Task<IActionResult> Create(Route route)
@@ -55,7 +58,7 @@ namespace MatesCarSite.Controllers
 
         public IActionResult Routes()
         {
-            var routesOfUser = context.Routes.Where(route => route.Driver.UserName.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
+            var routesOfUser = context.Routes?.Where(route => route.Driver.UserName.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
 
 
             return View(routesOfUser);

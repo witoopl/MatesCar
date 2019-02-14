@@ -27,9 +27,28 @@
                 <input asp-for="FuelUsage" class="form-control" />
                 <span asp-validation-for="FuelUsage" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                tu pojawi sie kontrolka do dodawania użytkowników
+            <div class="dropdown">
+                <input type="text" class="dropdown-toggle do" id="InputField">
+                <div class="dropdown-menu">
+                    <input type="checkbox" class="dropdown-item" />
+                    <input type="checkbox" class="dropdown-item" />
+                    <input type="checkbox" class="dropdown-item" />
+                </div>
             </div>
+            <label>
+                Choose a browser from this list:
+            </label>
+
+            <input list="browsers" name="myBrowser" type="text" multiple/>
+            <datalist id="browsers" >
+                <option value="Chrome"/>
+                <option value="Firefox"/>
+                <option value="Internet Explorer"/>
+                <option value="Opera"/>
+                <option value="Safari"/>
+                <option value="Microsoft Edge"/>
+            </datalist>
+
             <div class="form-group">
                 <label asp-for="ChargeForPassenger" class="control-label"></label>
                 <input asp-for="ChargeForPassenger" class="form-control" />
@@ -40,7 +59,7 @@
                 <input asp-for="Driver.UserName" class="form-control" value="@User.Identity.Name" />
                 <span asp-validation-for="Driver.UserName" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <div class="checkbox">
                     <label>
@@ -58,4 +77,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

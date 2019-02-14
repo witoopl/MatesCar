@@ -13,10 +13,14 @@
                 <td>@route.EndLocation</td>
                 <td>@route.ChargeForPassenger</td>
                 <td>@route.IsFullyPaid</td>
-                foreach (var passenger in route.Passengers)
+                if (route.Passengers != null)
                 {
-                    <td>@passenger</td>
+                    foreach (var passenger in route.Passengers)
+                    {
+                        <td>@passenger</td>
+                    }
                 }
+
 
 
 
