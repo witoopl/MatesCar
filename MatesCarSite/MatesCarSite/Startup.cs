@@ -1,4 +1,5 @@
-﻿using MatesCarSite.Models;
+﻿using MatesCarSite.Infrastructure;
+using MatesCarSite.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +15,10 @@ namespace MatesCarSite
     {
         public Startup(IConfiguration configuration)
         {
-            IoCContainer.Configuration = configuration;
+            Configuration = configuration;
         }
 
-
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -26,9 +27,9 @@ namespace MatesCarSite
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DefaultConnection"));
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 else
-                    options.UseSqlServer(IoCContainer.Configuration.GetConnectionString("DevelopmentConnection"));
+                    options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
 
 
                 Infrastructure.GetAllEvsClass.zasadyAplikacji = Environment.GetEnvironmentVariables();
@@ -52,10 +53,12 @@ namespace MatesCarSite
                 //Adds UserStore and RoleStore from this context
                 //That are consumed by the UserMangaer an RoleManager
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                
+
                 //Adds a provider that generates unique keys and hashes for things like
                 // forgot password links, phone number verification codes etc...
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                //Adds polish messeges for Model errors TODO: region detection
+                .AddErrorDescriber<PolishModelErrors>();
 
            
             //Change password policy
@@ -67,6 +70,7 @@ namespace MatesCarSite
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
             });
 
 
@@ -80,23 +84,17 @@ namespace MatesCarSite
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
                
             });
-            
 
 
-            services.AddMvc(options =>
-            {
-                options.InputFormatters.Add(new XmlSerializerInputFormatter());
-                options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
 
-            });
+            services.AddMvc();
+
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
-            //Store instance of the DI service provider so our application can access it anywhere
-            IoCContainer.Provider = (ServiceProvider)serviceProvider;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -22,7 +22,7 @@ namespace MatesCarSite.Models
         [Required]
         public ApplicationUser Driver { get; set; }
         [Required]
-        public string NonAppPassengers { get; set; }
+        public List<ApplicationUser> Passengers{ get; set; }
         [Required]
         public float ChargeForPassenger { get; set; }
         [Required]

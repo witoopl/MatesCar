@@ -37,7 +37,7 @@ namespace MatesCarSite
 
             //Fluent API
 
-           // modelBuilder.Entity<SettingsDataModel>().HasIndex(a => a.Name);
+            modelBuilder.Entity<ApplicationUser>().HasIndex(e => e.Email).IsUnique();
         }
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)

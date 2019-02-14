@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MatesCarSite.ViewModels
 {
@@ -10,13 +6,11 @@ namespace MatesCarSite.ViewModels
     {
         [MaxLength(64)]
         [Required(ErrorMessageResourceName = "UsernameIsRequired", ErrorMessageResourceType =typeof(Resources.Errors))]
-        [Key]
         [Display(Name = "Nazwa użytkownika")]
         public string Username { get; set; }
         [MaxLength(64)]
         [Required]
-        [Key]
-        [EmailAddress(ErrorMessageResourceName = "InvalidEmail",ErrorMessageResourceType =typeof(Resources.Errors))]
+        [EmailAddress(ErrorMessageResourceName = "InvalidEmail",ErrorMessageResourceType = typeof(Resources.Errors))]
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }

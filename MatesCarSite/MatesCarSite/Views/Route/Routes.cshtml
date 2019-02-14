@@ -13,7 +13,11 @@
                 <td>@route.EndLocation</td>
                 <td>@route.ChargeForPassenger</td>
                 <td>@route.IsFullyPaid</td>
-                <td>@route.NonAppPassengers</td>
+                foreach (var passenger in route.Passengers)
+                {
+                    <td>@passenger</td>
+                }
+
 
 
             }

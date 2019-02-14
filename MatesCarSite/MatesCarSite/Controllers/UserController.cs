@@ -59,6 +59,7 @@ namespace MatesCarSite.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 ApplicationUser user = new ApplicationUser
                 {
                     UserName = model.Username,
@@ -73,7 +74,7 @@ namespace MatesCarSite.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index");
+                    return View("Success");
                 }
                 else
                 {
@@ -85,6 +86,11 @@ namespace MatesCarSite.Controllers
             }
             
             return View(model);
+        }
+        [AllowAnonymous]
+        public IActionResult Success()
+        {
+            return View();
         }
 
         #endregion

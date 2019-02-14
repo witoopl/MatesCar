@@ -67,7 +67,7 @@ namespace MatesCarSite.Controllers
 
         public IActionResult Debts()
         {
-            var debtsOfUser = context.Debts.Where(debt => debt.NameOfLoanHolder.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
+            var debtsOfUser = context.Debts.Where(debt => debt.NameOfLoanHolder.UserName.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
             
             return View(debtsOfUser);
         }

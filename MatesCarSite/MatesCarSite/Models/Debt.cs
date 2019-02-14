@@ -11,13 +11,13 @@ namespace MatesCarSite.Models
         [Key]
         public string Id { get; set; }
         [Required]
-        public string NameOfLoanHolder { get; set; }
+        public ApplicationUser NameOfLoanHolder { get; set; }
         [Required]
-        public string NameOfDebtor { get; set; }
+        public List<ApplicationUser> NameOfDebtor { get; set; }
         [Required]
         public float Value { get; set; }
         public Route Route { get; set; }
-        public ApplicationUser AssociatedUser { get; set; }
+        
 
 
     }
