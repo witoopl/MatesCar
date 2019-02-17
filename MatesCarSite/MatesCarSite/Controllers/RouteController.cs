@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MatesCarSite.Models;
+using MatesCarSite.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -42,8 +43,22 @@ namespace MatesCarSite.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Route route)
+        public async Task<IActionResult> Create(RouteCreateViewModel route)
         {
+            var userList = userManager.Users.ToList();
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            ViewBag.FriendsList = user.Friends;
+            Route tempRoute = new Route
+            {
+                ChargeForPassenger = route.ChargeForPassenger,
+                Driver = route.Driver,
+                EndLocation = route.EndLocation,
+                StartLocation = route.StartLocation,
+                FuelUsage = route.FuelUsage,
+                IsFullyPaid = route.IsFullyPaid,
+                Passengers = new List<ApplicationUser>()
+
+            };
             if (ModelState.IsValid)
             {
                 context.Routes.Add(route);
@@ -84,6 +99,18 @@ namespace MatesCarSite.Controllers
                 dane.Add(klucze[i], wartosci[i]);
             return View(dane);
         }
+        #endregion
+
+        #region HelperFunctions
+        /// <summary>
+        /// Function to get all passengers from RouteCreateViewModel and insert it into RouteModel
+        /// </summary>
+        /// <returns></returns>
+        private List<ApplicationUser> GetPassengers()
+        {
+            return new List<ApplicationUser>();
+        }
+
         #endregion
     }
 }
