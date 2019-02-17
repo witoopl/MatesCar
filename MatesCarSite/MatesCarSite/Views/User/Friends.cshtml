@@ -1,0 +1,41 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Friends";
+}
+
+<h1>Twoi znajomi</h1>
+@if (Model == null ||  Model.Count == 0)
+{
+    <p>Nie masz żadnych przyjaciół</p>
+}
+else
+{
+    <table class="table">
+        
+        <tr>
+            <th>Nazwa użytkownika</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Usuń</th>
+        </tr>
+        @foreach (var friend in Model)
+        {
+            <tr>
+                <td>@friend.UserName</td>
+                <td>@friend.UserFirstName</td>
+                <td>@friend.UserSurname</td>
+                <td>
+                    <form asp-action="FriendDelete" name="friendId" method="post" asp-route-friendId="@friend.Id">
+                        <button class="btn btn-danger" type="submit">Usuń</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+<a asp-action="FriendsAdd" asp-controller="User" class="btn btn-primary">Dodaj</a>
+
+
+

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MatesCarSite
@@ -40,7 +41,7 @@ namespace MatesCarSite
             modelBuilder.Entity<ApplicationUser>().HasIndex(e => e.Email).IsUnique();
         }
 
-        public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
+        public static async Task CreateAdminAccountAndBasicRoles(IServiceProvider serviceProvider, IConfiguration configuration)
         {
             UserManager<ApplicationUser> userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             RoleManager<IdentityRole> roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -49,17 +50,26 @@ namespace MatesCarSite
             string email = configuration["Data:AdminUser:Email"];
             string password = configuration["Data:AdminUser:Password"];
             string role = configuration["Data:AdminUser:Role"];
+            string userFirstName = configuration["Data:AdminUser:UserFirstName"];
+            string userSurname = configuration["Data:AdminUser:UserSurname"];
+            string usersRoles = configuration["Data:AdminUser:UsersRoles"];
 
-            if(await userManager.FindByNameAsync(username) == null)
+            if (await userManager.FindByNameAsync(username) == null)
             {
                 if (await roleManager.FindByNameAsync(role) == null)
                 {
                     await roleManager.CreateAsync(new IdentityRole(role));
                 }
+                if (await roleManager.FindByNameAsync(usersRoles) == null)
+                {
+                    await roleManager.CreateAsync(new IdentityRole(usersRoles));
+                }
                 ApplicationUser user = new ApplicationUser
                 {
                     UserName = username,
-                    Email = email
+                    Email = email,
+                    UserFirstName = userFirstName,
+                    UserSurname = userSurname
                 };
                 IdentityResult result = await userManager.CreateAsync(user, password);
                 if (result.Succeeded)

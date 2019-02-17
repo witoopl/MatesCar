@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MatesCarSite.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatesCarSite.Controllers
@@ -15,13 +16,15 @@ namespace MatesCarSite.Controllers
         #region Private members
 
         private ApplicationDbContext context;
+        private UserManager<ApplicationUser> userManager;
 
         #endregion
 
         #region Constructor
-        public RouteController(ApplicationDbContext _context)
+        public RouteController(ApplicationDbContext _context, UserManager<ApplicationUser> _userManager)
         {
             context = _context;
+            userManager = _userManager;
         }
         #endregion
 
@@ -31,12 +34,12 @@ namespace MatesCarSite.Controllers
             return View();
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-
-            return View(new Route {
-                Passengers = context.Users.ToList()
-            });
+            var userList = userManager.Users.ToList();
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            ViewBag.FriendsList = user.Friends;
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(Route route)
@@ -63,6 +66,11 @@ namespace MatesCarSite.Controllers
 
             return View(routesOfUser);
         }
+
+        /// <summary>
+        /// Debug method to get all eviromental variables. To delete 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Zasady()
         {

@@ -122,7 +122,8 @@ namespace MatesCarSite
 
 
             
-            //ApplicationDbContext.CreateAdminAccount(serviceProvider, IoCContainer.Configuration).Wait();
+            ApplicationDbContext.CreateAdminAccountAndBasicRoles(serviceProvider, Configuration).Wait();
+
             
         }
     }

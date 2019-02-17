@@ -27,27 +27,22 @@
                 <input asp-for="FuelUsage" class="form-control" />
                 <span asp-validation-for="FuelUsage" class="text-danger"></span>
             </div>
-            <div class="dropdown">
-                <input type="text" class="dropdown-toggle do" id="InputField">
-                <div class="dropdown-menu">
-                    <input type="checkbox" class="dropdown-item" />
-                    <input type="checkbox" class="dropdown-item" />
-                    <input type="checkbox" class="dropdown-item" />
-                </div>
-            </div>
+       
             <label>
-                Choose a browser from this list:
+                Choose your friends
             </label>
 
-            <input list="browsers" name="myBrowser" type="text" multiple/>
-            <datalist id="browsers" >
-                <option value="Chrome"/>
-                <option value="Firefox"/>
-                <option value="Internet Explorer"/>
-                <option value="Opera"/>
-                <option value="Safari"/>
-                <option value="Microsoft Edge"/>
-            </datalist>
+           
+            <div class="form-group">
+                
+                <select multiple="multiple" resource="@Model.Passengers">
+                    @foreach (ApplicationUser user in ViewBag.FriendsList)
+                    {
+                        <option value="@user.UserName">@user.UserFirstName @user.UserSurname</option>
+                    }
+                </select>
+            </div>
+           
 
             <div class="form-group">
                 <label asp-for="ChargeForPassenger" class="control-label"></label>

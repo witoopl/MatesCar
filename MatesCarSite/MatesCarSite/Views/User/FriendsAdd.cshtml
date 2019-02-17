@@ -1,0 +1,19 @@
+﻿@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Friends";
+}
+
+
+<form method="post" asp-action="FriendsAdd">
+    <input list="allUsers" name="user" type="text" class="form-control" autocomplete="off" />
+    <datalist id="allUsers">
+        @foreach (var user in Model)
+        {
+            <option value="@user.UserName"> @user.UserFirstName @user.UserSurname</option>
+        }
+
+    </datalist>
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+</form>
+
+
