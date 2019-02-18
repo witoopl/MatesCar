@@ -4,14 +4,16 @@ using MatesCarSite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MatesCarSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190217230417_Fixed_database_now_refrencing_via_Ids_only")]
+    partial class Fixed_database_now_refrencing_via_Ids_only
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,20 +105,6 @@ namespace MatesCarSite.Migrations
                     b.ToTable("Debts");
                 });
 
-            modelBuilder.Entity("MatesCarSite.Models.Friend", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("User");
-
-                    b.Property<string>("UserFriend");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Friends");
-                });
-
             modelBuilder.Entity("MatesCarSite.Models.Route", b =>
                 {
                     b.Property<string>("Id")
@@ -139,20 +127,6 @@ namespace MatesCarSite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Routes");
-                });
-
-            modelBuilder.Entity("MatesCarSite.Models.UsersToRoute", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("PassengerId");
-
-                    b.Property<string>("RouteId");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UsersToRoutes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

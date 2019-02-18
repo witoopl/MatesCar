@@ -22,7 +22,6 @@ namespace MatesCarSite.Models
         public string UserFirstName { get; set; }
         [Required]
         public string UserSurname { get; set; }
-        public List<ApplicationUser> Friends { get; set; }
 
 
     }

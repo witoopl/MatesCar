@@ -19,6 +19,8 @@ namespace MatesCarSite
         #region Public properties
         public DbSet<Debt> Debts { get; set; }
         public DbSet<Route> Routes { get; set; }
+        public DbSet<Friend> Friends { get; set; }
+        public DbSet<UsersToRoute> UsersToRoutes {get; set;}
         #endregion
 
         #region Constructor

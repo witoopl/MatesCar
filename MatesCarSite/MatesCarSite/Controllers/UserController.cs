@@ -97,79 +97,106 @@ namespace MatesCarSite.Controllers
 
         public async Task<IActionResult> Friends()
         {
-            List<ApplicationUser> listOfUsers = userManager.Users.ToList();
-            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-
-            return View(user.Friends);
-
-            //return View("Error", "Shared");
-        }
-        [AllowAnonymous]
-        public IActionResult Friends2()
-        {
-            var test = context.Users.ToList();
-
-            return View("Friends2",test);
-        }
-
-        public async Task<IActionResult> FriendsAdd()
-        {
-            
-            List<ApplicationUser> listOfUsers = userManager.Users.ToList();
-            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            listOfUsers.Remove(user);
-            if(user.Friends != null && user.Friends.Count != 0)
-                foreach (var friend in user.Friends)
-                {
-                    listOfUsers.Remove(friend);
-                }
-            if (listOfUsers != null)
-                return View(listOfUsers);
-            
-            return View("Error","Shared");
-        }
-        [HttpPost]
-        public async Task<IActionResult> FriendsAdd(string user)
-        {
-            
-            if (user != null)
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var result = context.Friends?.Where(f => f.User == user.Id.ToString());
+            List<ApplicationUser> userFriendsList = new List<ApplicationUser>();
+            if (result!=null)
             {
-                List<ApplicationUser> listOfUsers = userManager.Users.ToList();
-                ApplicationUser appUser = await userManager.GetUserAsync(HttpContext.User);
-                ApplicationUser newFriend = await userManager.FindByNameAsync(user);
-                if (newFriend == null)
-                {
-                    return Redirect("FriendsAdd");
-                }
-                if (appUser.Friends == null)
-                    appUser.Friends = new List<ApplicationUser>();
-                appUser.Friends.Add(newFriend);
-                var result = await userManager.UpdateAsync(appUser);
+                var nonFilteredUsers = context.Users.ToList();
                 
-                if (result.Succeeded)
+                foreach (var friend in result)
                 {
-                    //return View("Friends2", appUser.Friends);
-                    return Redirect("Friends");
+                    var friendsToDisplay = nonFilteredUsers.First(a => a.Id == friend.UserFriend);
+                    if (friendsToDisplay != null)
+                        userFriendsList.Add(friendsToDisplay);
+                }
+                
+            }
+            return View(userFriendsList);
+        }
+
+        public async Task<IActionResult> AddFriend()
+        {
+            List<ApplicationUser> getUsers;
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            getUsers = userManager.Users.ToList() ?? new List<ApplicationUser>();
+            if(getUsers.Count > 0)
+            {
+                getUsers.Remove(user);
+                var alreadyFriends = context.Friends.Where(e => e.User == user.Id);
+                if(alreadyFriends != null)
+                {
+                    List<ApplicationUser> alreadyFriendsList = new List<ApplicationUser>();
+                    foreach (var aFriend in alreadyFriends)
+                    {
+                        alreadyFriendsList.Add(await userManager.FindByIdAsync(aFriend.UserFriend));
+                    }
+                    if(alreadyFriendsList != null)
+                    {
+                        foreach (var friend in alreadyFriendsList)
+                        {
+                            getUsers.Remove(friend);
+                        }
+                        return View(getUsers);
+                    }
+                        
                 }
             }
-
-
-            return Redirect("Friends");
+            return Content("BŁĄDSDSADSASD");
         }
 
-        public async Task<IActionResult> FriendDelete(string friendId)
+        [HttpPost]
+        public async Task<IActionResult> AddFriend(string friendName)
         {
-            List<ApplicationUser> listOfUsers = userManager.Users.ToList();
-            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            var friendToDelete = await userManager.FindByIdAsync(friendId);
-            if(friendToDelete!=null)
-                user.Friends.Remove(friendToDelete);
-            var result = await userManager.UpdateAsync(user);
-            if (result.Succeeded)
-                return Redirect("Friends");
-            else
-                return Content("Nie udało sie usunąć przyjaciela");
+            if (friendName != null)
+            {
+                var user = await userManager.GetUserAsync(HttpContext.User);
+                var friendToAdd = await userManager.FindByNameAsync(friendName);
+                if (friendToAdd != null)
+                {
+                    var friendId = friendToAdd.Id.ToString();
+                    var userId = user.Id;
+                    if (friendId != null && userId != null)
+                    {
+                        context.Friends.Add(new Friend
+                        {
+                            User = userId,
+                            UserFriend = friendId
+                        });
+                        var result = await context.SaveChangesAsync();
+                        if (result != 0)
+                            return RedirectToAction("Friends");
+                    }
+                }
+            }
+            
+            return Content("COŚ POSZŁO W CHUJ NIE TAK ZNOWU");
+            
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteFriend(string friendName)
+        {
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var friendToAdd = await userManager.FindByNameAsync(friendName);
+            if (friendToAdd != null)
+            {
+                var friendId = friendToAdd.Id.ToString();
+                var userId = user.Id;
+                if (friendId != null && userId != null)
+                {
+                    var friendship = context.Friends.ToList();
+                    var friendsToDelete = friendship.FindAll(e => e.User == user.Id && e.UserFriend == friendId);
+                    context.Friends.RemoveRange(friendsToDelete);
+                    var result = await context.SaveChangesAsync();
+                    if (result != 0)
+                        return RedirectToAction("Friends");
+
+                }
+            }
+            return Content("COŚ POSZŁO W CHUJ NIE TAK ZNOWU");
+
+        }
+
         #endregion
     }
 }

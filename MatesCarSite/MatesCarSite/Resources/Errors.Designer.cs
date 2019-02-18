@@ -61,6 +61,42 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Musisz podać opłatę za pasażera.
+        /// </summary>
+        internal static string ChargeForPassenger {
+            get {
+                return ResourceManager.GetString("ChargeForPassenger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd. Nie zapisano zmian..
+        /// </summary>
+        internal static string ContextSaveError {
+            get {
+                return ResourceManager.GetString("ContextSaveError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lokacja końcowa musi zostać podana.
+        /// </summary>
+        internal static string EndLocation {
+            get {
+                return ResourceManager.GetString("EndLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zużycie paliwa musi zostać podane.
+        /// </summary>
+        internal static string FuelUsage {
+            get {
+                return ResourceManager.GetString("FuelUsage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nieprawidłowy adres email.
         /// </summary>
         internal static string InvalidEmail {
@@ -75,6 +111,33 @@ namespace MatesCarSite.Resources {
         internal static string InvalidPhone {
             get {
                 return ResourceManager.GetString("InvalidPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trasa musi zawierać pasażerów z którymi dzielisz koszta.
+        /// </summary>
+        internal static string Passengers {
+            get {
+                return ResourceManager.GetString("Passengers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd. Droga nie została znaleziona.
+        /// </summary>
+        internal static string RouteNotFound {
+            get {
+                return ResourceManager.GetString("RouteNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lokacja startowa musi zostać podana.
+        /// </summary>
+        internal static string StartLocation {
+            get {
+                return ResourceManager.GetString("StartLocation", resourceCulture);
             }
         }
         

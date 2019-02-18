@@ -26,12 +26,12 @@ namespace MatesCarSite.Controllers
         /// <summary>
         /// The manager for  handling user creation, deletion, searching, roles etc...
         /// </summary>
-        protected UserManager<ApplicationUser> mUserManager;
+        protected UserManager<ApplicationUser> userManager;
 
         /// <summary>
         /// The manager for handling signing in and out for our users
         /// </summary>
-        protected SignInManager<ApplicationUser> mSignInManager;
+        protected SignInManager<ApplicationUser> signInManager;
 
         #endregion
         #region Constructor
@@ -39,11 +39,11 @@ namespace MatesCarSite.Controllers
         /// Default constructor
         /// </summary>
         /// <param name="context">The injected context</param>
-        public HomeController(ApplicationDbContext _context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public HomeController(ApplicationDbContext _context, UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager)
         {
             context = _context;
-            mUserManager = userManager;
-            mSignInManager = signInManager;
+            userManager = _userManager;
+            signInManager = _signInManager;
         }
         #endregion
         #region Actions
@@ -67,9 +67,16 @@ namespace MatesCarSite.Controllers
 
         public IActionResult Debts()
         {
-            var debtsOfUser = context.Debts.Where(debt => debt.NameOfLoanHolder.UserName.ToUpper() == HttpContext.User.Identity.Name.ToUpper());
+            var user = userManager.GetUserAsync(HttpContext.User);
+            if(user!=null)
+            {
+                var debtsOfUser = context.Debts.Where(debt => debt.IdLoanHolder == user.Id.ToString());
+                if(debtsOfUser!=null)
+                    return View(debtsOfUser);
+            }
+            return Content("BIG KURWA ERROR");
             
-            return View(debtsOfUser);
+            
         }
 
         

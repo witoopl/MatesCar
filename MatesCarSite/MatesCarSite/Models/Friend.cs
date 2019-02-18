@@ -7,18 +7,11 @@ using System.Threading.Tasks;
 
 namespace MatesCarSite.Models
 {
-    public class Debt
+    public class Friend
     {
         [Key]
         public string Id { get; set; }
-        [Required]
-        public string IdLoanHolder { get; set; }
-        public string IdLoanDebtor { get; set; }
-        [Required]
-        public float Value { get; set; }
-        public string RouteId { get; set; }
-        
-
-
+        public string User { get; set; }
+        public string UserFriend { get; set; }
     }
 }

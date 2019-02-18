@@ -81,7 +81,7 @@ namespace MatesCarSite
                 //options.LoginPath = "/Users/login";
                 //options.DataProtectionProvider = DataProtectionProvider.Create("Test");
                 //Change cookie timeout to expire in 5 days
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.ExpireTimeSpan = TimeSpan.FromDays(5);
                
             });
 

@@ -117,11 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChargeForPassenger" xml:space="preserve">
+    <value>Musisz podać opłatę za pasażera</value>
+  </data>
+  <data name="ContextSaveError" xml:space="preserve">
+    <value>Błąd. Nie zapisano zmian.</value>
+  </data>
+  <data name="EndLocation" xml:space="preserve">
+    <value>Lokacja końcowa musi zostać podana</value>
+  </data>
+  <data name="FuelUsage" xml:space="preserve">
+    <value>Zużycie paliwa musi zostać podane</value>
+  </data>
   <data name="InvalidEmail" xml:space="preserve">
     <value>Nieprawidłowy adres email</value>
   </data>
   <data name="InvalidPhone" xml:space="preserve">
     <value>Numer telefonu jest niewłaściwy</value>
+  </data>
+  <data name="Passengers" xml:space="preserve">
+    <value>Trasa musi zawierać pasażerów z którymi dzielisz koszta</value>
+    <comment> </comment>
+  </data>
+  <data name="RouteNotFound" xml:space="preserve">
+    <value>Błąd. Droga nie została znaleziona</value>
+  </data>
+  <data name="StartLocation" xml:space="preserve">
+    <value>Lokacja startowa musi zostać podana</value>
   </data>
   <data name="TooLongModelName" xml:space="preserve">
     <value>Nazwa modelu jest zbyt długa, maksymalnie 32 znaki</value>
