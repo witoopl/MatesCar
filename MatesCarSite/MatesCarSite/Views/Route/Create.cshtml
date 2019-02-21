@@ -1,5 +1,4 @@
-﻿@model MatesCarSite.ViewModels.RouteCreateViewModel
-
+﻿@model RouteCreateViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -36,13 +35,16 @@
             <div class="form-group">
                 
                 <table class="table">
-                    @foreach (ApplicationUser user in ViewBag.FriendsList)
-                    {
-                        <tr>
-                            <td>
-                             <input type="checkbox" name="Passengers" value="@user.UserName">@user.UserFirstName @user.UserSurname
-                            </td>
-                        </tr>
+                    @if (Model.Passengers?.Count() != 0)
+                    { 
+                        @foreach (var user in Model.Passengers)
+                        {
+                            <tr>
+                                <td>
+                                 <input type="checkbox" name="passengersId" value="@user.Id"/>@user.UserFirstName @user.UserSurname
+                                </td>
+                            </tr>
+                        }
                     }
                 </table>
             </div>

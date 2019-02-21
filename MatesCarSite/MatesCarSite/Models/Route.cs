@@ -11,7 +11,8 @@ namespace MatesCarSite.Models
     {
         [Key]
         public string Id{ get; set; }
-        public string Driver { get; set; }
+        [Display(ResourceType = typeof(Resources.ColumnNamesForRoutes), Name = "Driver")]
+        public ApplicationUser Driver { get; set; }
         [Required]
         public string StartLocation { get; set; }
         [Required]

@@ -32,7 +32,7 @@ namespace MatesCarSite
                     options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection"));
 
 
-                Infrastructure.GetAllEvsClass.zasadyAplikacji = Environment.GetEnvironmentVariables();
+                //Infrastructure.GetAllEvsClass.zasadyAplikacji = Environment.GetEnvironmentVariables();
             });
 
 
