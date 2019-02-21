@@ -12,11 +12,11 @@ namespace MatesCarSite.Models
         [Key]
         public string Id { get; set; }
         [Required]
-        public string IdLoanHolder { get; set; }
-        public string IdLoanDebtor { get; set; }
+        public ApplicationUser LoanHolderRef { get; set; }
+        public ApplicationUser LoanDebtorRef { get; set; }
         [Required]
         public float Value { get; set; }
-        public string RouteId { get; set; }
+        public Route RouteRef { get; set; }
         
 
 

@@ -50,14 +50,14 @@ namespace MatesCarSite.Controllers
         public async Task<IActionResult> Create()
         { 
             ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            var allUserFriendsId = context.Friends.Where(i => i.User == user.Id);
-            if(allUserFriendsId!=null)
+            var allUserFriends = context.Friends.Where(i => i.UserRef == user);
+            if(allUserFriends!=null)
             {
                 List<ApplicationUser> allUserFriendsAccounts = new List<ApplicationUser>();
                 List<ApplicationUser> allUsers = context.Users.ToList();
-                foreach (var friend in allUserFriendsId)
+                foreach (var friend in allUserFriends)
                 {
-                    var userFriend = allUsers.First(i => i.Id == friend.UserFriend);
+                    var userFriend = allUsers.First(i => i == friend.UserFriendRef);
                     if (userFriend != null)
                     {
                         allUserFriendsAccounts.Add(userFriend);
@@ -100,14 +100,14 @@ namespace MatesCarSite.Controllers
                         {
                             context.UsersToRoutes.Add(new UsersToRoute
                             {
-                                PassengerId = passenger.Id,
-                                RouteId = newRoute.Id
+                                PassengerRef = passenger,
+                                RouteRef = newRoute
                             });
                             context.Debts.Add(new Debt
                             {
-                                IdLoanHolder = user.Id,
-                                IdLoanDebtor = passenger.Id,
-                                RouteId = newRoute.Id,
+                                LoanHolderRef = user,
+                                LoanDebtorRef = passenger,
+                                RouteRef = newRoute,
                                 Value = routeViewModel.ChargeForPassenger
                             });
                         }
@@ -123,18 +123,32 @@ namespace MatesCarSite.Controllers
             return View(routeViewModel);
         }
 
-        public IActionResult Delete(string routeId)
+        public async Task<IActionResult> Delete(string routeId)
         {
-            
-            var route = context.Routes.First(a => a.Id == routeId);
-            var userToRoutes = context.UsersToRoutes.Where(i => i.RouteId == routeId);
-            foreach (var userroutes in userToRoutes)
+            if (routeId != null)
             {
-                context.UsersToRoutes.Remove(userroutes);
+                var route = context.Routes.First(a => a.Id == routeId);
+                if(route != null)
+                {
+                    var userToRoutes = context.UsersToRoutes?.Where(i => i.RouteRef.Id == routeId);
+                    if (userToRoutes != null)
+                        foreach (var userroutes in userToRoutes)
+                        {
+                            context.UsersToRoutes.Remove(userroutes);
+                        }
+                    var debts = context.Debts.Where(i => i.RouteRef.Id == routeId);
+                    if (debts != null)
+                        foreach (var debt in debts)
+                        {
+                            context.Debts.Remove(debt);
+                        }
+                    context.Routes.Remove(route);
+                    var result = await context.SaveChangesAsync();
+                }
+                
             }
             
-
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         #endregion

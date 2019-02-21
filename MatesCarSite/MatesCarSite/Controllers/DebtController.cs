@@ -27,10 +27,11 @@ namespace MatesCarSite.Controllers
 
         #region Actions
         public async Task<IActionResult> Index()
-        {
+        { 
             ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
-            var userDebts = context.Debts.Where(d => d.IdLoanDebtor == user.Id);
-
+            var userList = userManager.Users.ToList();
+            var userDebts = context.Debts.Where(d => d.LoanDebtorRef == user);
+            
             return View(userDebts.ToList());
 
         }

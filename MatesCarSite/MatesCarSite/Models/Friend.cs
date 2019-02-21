@@ -11,7 +11,7 @@ namespace MatesCarSite.Models
     {
         [Key]
         public string Id { get; set; }
-        public string User { get; set; }
-        public string UserFriend { get; set; }
+        public ApplicationUser UserRef { get; set; }
+        public ApplicationUser UserFriendRef { get; set; }
     }
 }

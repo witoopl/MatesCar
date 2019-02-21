@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MatesCarSite.Models.Debt>
+﻿@model List<MatesCarSite.Models.Debt>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,56 +9,41 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdLoanHolder)
+                Kurła kiedyś to było
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdLoanDebtor)
+             <th>
+                Kurła kiedyś to było
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Value)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RouteId)
+             <th>
+                Kurła kiedyś to było
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @if (Model != null)
-        {
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdLoanHolder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdLoanDebtor)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Value)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RouteId)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-            }
-        }
-        else
-        {
-            <dir>Nie masz żadnych długów</dir>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.LoanHolderRef.UserFirstName @item.LoanHolderRef.UserSurname - @item.LoanHolderRef.UserName
+            </td>
+            <td>
+                @item.RouteRef.StartLocation - @item.RouteRef.EndLocation
+            </td>
+            <td>
+                @item.Value
+            </td>
 
-
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>

@@ -98,7 +98,7 @@ namespace MatesCarSite.Controllers
         public async Task<IActionResult> Friends()
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
-            var result = context.Friends?.Where(f => f.User == user.Id.ToString());
+            var result = context.Friends?.Where(f => f.UserRef == user);
             List<ApplicationUser> userFriendsList = new List<ApplicationUser>();
             if (result!=null)
             {
@@ -106,7 +106,7 @@ namespace MatesCarSite.Controllers
                 
                 foreach (var friend in result)
                 {
-                    var friendsToDisplay = nonFilteredUsers.First(a => a.Id == friend.UserFriend);
+                    var friendsToDisplay = nonFilteredUsers.First(a => a == friend.UserFriendRef);
                     if (friendsToDisplay != null)
                         userFriendsList.Add(friendsToDisplay);
                 }
@@ -123,13 +123,13 @@ namespace MatesCarSite.Controllers
             if(getUsers.Count > 0)
             {
                 getUsers.Remove(user);
-                var alreadyFriends = context.Friends.Where(e => e.User == user.Id);
+                var alreadyFriends = context.Friends.Where(e => e.UserRef == user);
                 if(alreadyFriends != null)
                 {
                     List<ApplicationUser> alreadyFriendsList = new List<ApplicationUser>();
                     foreach (var aFriend in alreadyFriends)
                     {
-                        alreadyFriendsList.Add(await userManager.FindByIdAsync(aFriend.UserFriend));
+                        alreadyFriendsList.Add(aFriend.UserFriendRef);
                     }
                     if(alreadyFriendsList != null)
                     {
@@ -154,14 +154,12 @@ namespace MatesCarSite.Controllers
                 var friendToAdd = await userManager.FindByNameAsync(friendName);
                 if (friendToAdd != null)
                 {
-                    var friendId = friendToAdd.Id.ToString();
-                    var userId = user.Id;
-                    if (friendId != null && userId != null)
+                    if (friendToAdd != null && user != null)
                     {
                         context.Friends.Add(new Friend
                         {
-                            User = userId,
-                            UserFriend = friendId
+                            UserRef = user,
+                            UserFriendRef = friendToAdd
                         });
                         var result = await context.SaveChangesAsync();
                         if (result != 0)
@@ -180,12 +178,10 @@ namespace MatesCarSite.Controllers
             var friendToAdd = await userManager.FindByNameAsync(friendName);
             if (friendToAdd != null)
             {
-                var friendId = friendToAdd.Id.ToString();
-                var userId = user.Id;
-                if (friendId != null && userId != null)
+                if (friendToAdd != null && user != null)
                 {
                     var friendship = context.Friends.ToList();
-                    var friendsToDelete = friendship.FindAll(e => e.User == user.Id && e.UserFriend == friendId);
+                    var friendsToDelete = friendship.FindAll(e => e.UserRef == user && e.UserFriendRef == friendToAdd);
                     context.Friends.RemoveRange(friendsToDelete);
                     var result = await context.SaveChangesAsync();
                     if (result != 0)

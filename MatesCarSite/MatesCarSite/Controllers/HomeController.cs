@@ -70,7 +70,7 @@ namespace MatesCarSite.Controllers
             var user = userManager.GetUserAsync(HttpContext.User);
             if(user!=null)
             {
-                var debtsOfUser = context.Debts.Where(debt => debt.IdLoanHolder == user.Id.ToString());
+                var debtsOfUser = context.Debts.Where(debt => debt.LoanHolderRef.Id == user.Id.ToString());
                 if(debtsOfUser!=null)
                     return View(debtsOfUser);
             }
