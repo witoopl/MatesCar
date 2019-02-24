@@ -137,7 +137,9 @@
   </data>
   <data name="Passengers" xml:space="preserve">
     <value>Trasa musi zawierać pasażerów z którymi dzielisz koszta</value>
-    <comment> </comment>
+  </data>
+  <data name="PasswordNotTheSame" xml:space="preserve">
+    <value>Hasła muszą być identyczne</value>
   </data>
   <data name="RouteNotFound" xml:space="preserve">
     <value>Błąd. Droga nie została znaleziona</value>

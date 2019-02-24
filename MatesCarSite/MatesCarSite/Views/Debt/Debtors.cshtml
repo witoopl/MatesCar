@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForDebts.Driver
+                @MatesCarSite.Resources.ColumnNamesForDebts.IdLoanHolder
             </th>
             <th>
                 @MatesCarSite.Resources.ColumnNamesForDebts.Route
@@ -28,7 +28,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @item.LoanHolderRef.UserFirstName @item.LoanHolderRef.UserSurname - @item.LoanHolderRef.UserName
+                @item.LoanDebtorRef.UserFirstName @item.LoanDebtorRef.UserSurname - @item.LoanDebtorRef.UserName
             </td>
             <td>
                 @item.RouteRef.StartLocation - @item.RouteRef.EndLocation

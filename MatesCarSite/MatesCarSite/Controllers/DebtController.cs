@@ -30,9 +30,21 @@ namespace MatesCarSite.Controllers
         { 
             ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
             var userList = userManager.Users.ToList();
+            var routesList = context.Routes.ToList();
             var userDebts = context.Debts.Where(d => d.LoanDebtorRef == user);
             
             return View(userDebts.ToList());
+
+        }
+
+        public async Task<IActionResult> Debtors()
+        {
+            ApplicationUser user = await userManager.GetUserAsync(HttpContext.User);
+            var userList = userManager.Users.ToList();
+            var routesList = context.Routes.ToList();
+            var userDebtors = context.Debts.Where(d => d.LoanHolderRef == user);
+
+            return View(userDebtors.ToList());
 
         }
 

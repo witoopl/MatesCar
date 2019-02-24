@@ -22,14 +22,14 @@ namespace MatesCarSite.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ColumnNamesForRoutes {
+    public class ColumnNamesForDebts {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ColumnNamesForRoutes() {
+        internal ColumnNamesForDebts() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MatesCarSite.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MatesCarSite.Resources.ColumnNamesForRoutes", typeof(ColumnNamesForRoutes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MatesCarSite.Resources.ColumnNamesForDebts", typeof(ColumnNamesForDebts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,15 +61,6 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opłata za pasażera.
-        /// </summary>
-        public static string ChargeForPassenger {
-            get {
-                return ResourceManager.GetString("ChargeForPassenger", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Kierowca.
         /// </summary>
         public static string Driver {
@@ -79,56 +70,29 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lokacja końcowa.
+        ///   Looks up a localized string similar to Dłużnik.
         /// </summary>
-        public static string EndLocation {
+        public static string IdLoanDebtor {
             get {
-                return ResourceManager.GetString("EndLocation", resourceCulture);
+                return ResourceManager.GetString("IdLoanDebtor", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zużycie paliwa.
+        ///   Looks up a localized string similar to Wierzyciel.
         /// </summary>
-        public static string FuelUsage {
+        public static string IdLoanHolder {
             get {
-                return ResourceManager.GetString("FuelUsage", resourceCulture);
+                return ResourceManager.GetString("IdLoanHolder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opłacona.
+        ///   Looks up a localized string similar to Wartość długu.
         /// </summary>
-        public static string IsFullyPaid {
+        public static string LoanValue {
             get {
-                return ResourceManager.GetString("IsFullyPaid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to nie.
-        /// </summary>
-        public static string IsPaidFalse {
-            get {
-                return ResourceManager.GetString("IsPaidFalse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to tak.
-        /// </summary>
-        public static string IsPaidTrue {
-            get {
-                return ResourceManager.GetString("IsPaidTrue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pasażerowie.
-        /// </summary>
-        public static string Passengers {
-            get {
-                return ResourceManager.GetString("Passengers", resourceCulture);
+                return ResourceManager.GetString("LoanValue", resourceCulture);
             }
         }
         
@@ -138,15 +102,6 @@ namespace MatesCarSite.Resources {
         public static string Route {
             get {
                 return ResourceManager.GetString("Route", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Lokacja startowa.
-        /// </summary>
-        public static string StartLocation {
-            get {
-                return ResourceManager.GetString("StartLocation", resourceCulture);
             }
         }
     }

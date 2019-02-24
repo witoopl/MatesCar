@@ -1,0 +1,57 @@
+﻿@model MatesCarSite.ViewModels.RouteDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@General.Details</h1>
+
+<div>
+    <h4>@ColumnNamesForRoutes.Route</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @ColumnNamesForRoutes.StartLocation
+        </dt>
+        <dd class="col-sm-10">
+            @Model.StartLocation
+        </dd>
+        <dt class="col-sm-2">
+            @ColumnNamesForRoutes.EndLocation
+        </dt>
+        <dd class="col-sm-10">
+            @Model.EndLocation
+        </dd>
+        <dt class="col-sm-2">
+            @ColumnNamesForRoutes.FuelUsage
+        </dt>
+        <dd class="col-sm-10">
+            @Model.FuelUsage
+        </dd>
+        <dt class="col-sm-2">
+            @ColumnNamesForRoutes.ChargeForPassenger
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ChargeForPassenger
+        </dd>
+        <dt class="col-sm-2">
+            @ColumnNamesForRoutes.IsFullyPaid
+        </dt>
+        <dd class="col-sm-10">
+            @(Model.IsFullyPaid ? ColumnNamesForRoutes.IsPaidTrue :  ColumnNamesForRoutes.IsPaidFalse)
+        </dd> 
+    </dl>
+    
+    <b>@ColumnNamesForRoutes.Passengers</b>
+        <ul>
+            @foreach (var passenger in Model.PassengersInRoute)
+            {
+                <li>@passenger.UserFirstName @passenger.UserSurname</li>
+            }
+        </ul>
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Buttons.Edit</a> |
+    <a asp-action="Index">@General.BackToList</a>
+</div>

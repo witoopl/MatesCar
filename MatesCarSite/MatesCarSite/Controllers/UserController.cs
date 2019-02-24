@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MatesCarSite.Models;
+﻿using MatesCarSite.Models;
 using MatesCarSite.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MatesCarSite.Controllers
 {
@@ -60,31 +59,37 @@ namespace MatesCarSite.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                ApplicationUser user = new ApplicationUser
+                if(model.Password == model.PasswordConfirm)
                 {
-                    UserName = model.Username,
-                    Email = model.Email,
-                    UserFirstName = model.FirstName,
-                    UserSurname = model.Surname,
-                    IsDriver = model.IsDriver,
-                    DefaultBankAccount = model.BankAccount,
-                    PhoneNumber = model.PhoneNumber
-                    
-                };
-                IdentityResult result = await userManager.CreateAsync(user, model.Password);
-                var roleResult = await userManager.AddToRoleAsync(user, "User");
-                if (result.Succeeded && roleResult.Succeeded)
-                {
-                    return View("Success");
-                }
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
+                    ApplicationUser user = new ApplicationUser
                     {
-                        ModelState.AddModelError("", error.Description);
+                        UserName = model.Username,
+                        Email = model.Email,
+                        UserFirstName = model.FirstName,
+                        UserSurname = model.Surname,
+                        IsDriver = model.IsDriver,
+                        DefaultBankAccount = model.BankAccount,
+                        PhoneNumber = model.PhoneNumber
+
+                    };
+                    IdentityResult result = await userManager.CreateAsync(user, model.Password);
+                    var roleResult = await userManager.AddToRoleAsync(user, "User");
+                    if (result.Succeeded && roleResult.Succeeded)
+                    {
+                        return View("Success");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
+                ModelState.AddModelError("", Resources.Errors.PasswordNotTheSame);
+                model.PasswordConfirm = "";
+                model.Password = "";
+
             }
             
             return View(model);

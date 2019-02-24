@@ -151,6 +151,46 @@ namespace MatesCarSite.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Details(string routeId)
+        {
+            List<ApplicationUser> userList;
+            if (routeId != null)
+            {
+                var route = context.Routes.First(a => a.Id == routeId);
+                if (route != null)
+                {
+                    userManager.Users.ToList();
+                    var passengersRef = context.UsersToRoutes.Where(u => u.RouteRef == route);
+                    if(passengersRef!=null)
+                    {
+                        userList = new List<ApplicationUser>();
+                        foreach (var routePassengers in passengersRef)
+                        {
+                            var passUser = context.Users.First(u=>u == routePassengers.PassengerRef);
+                            if (passUser != null)
+                                userList.Add(passUser);
+                        }
+                        var routeViewDetails = new RouteDetailsViewModel
+                        {
+                            ChargeForPassenger = route.ChargeForPassenger,
+                            Driver = route.Driver,
+                            EndLocation = route.EndLocation,
+                            FuelUsage = route.FuelUsage,
+                            Id = route.Id,
+                            IsFullyPaid = route.IsFullyPaid,
+                            PassengersInRoute = userList,
+                            StartLocation = route.StartLocation
+                        };
+                        return View(routeViewDetails);
+                    }
+                    
+                       
+                }
+
+
+            }
+            return RedirectToAction("Index");
+        }
         #endregion
     }
 }

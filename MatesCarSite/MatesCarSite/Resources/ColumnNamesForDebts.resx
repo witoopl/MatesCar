@@ -117,16 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Driver" xml:space="preserve">
+    <value>Kierowca</value>
+  </data>
   <data name="IdLoanDebtor" xml:space="preserve">
     <value>Dłużnik</value>
   </data>
   <data name="IdLoanHolder" xml:space="preserve">
     <value>Wierzyciel</value>
   </data>
+  <data name="LoanValue" xml:space="preserve">
+    <value>Wartość długu</value>
+  </data>
   <data name="Route" xml:space="preserve">
     <value>Droga</value>
-  </data>
-  <data name="Value" xml:space="preserve">
-    <value>Wartość długu</value>
   </data>
 </root>

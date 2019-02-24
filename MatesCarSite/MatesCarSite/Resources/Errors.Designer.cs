@@ -124,6 +124,15 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hasła muszą być identyczne.
+        /// </summary>
+        internal static string PasswordNotTheSame {
+            get {
+                return ResourceManager.GetString("PasswordNotTheSame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd. Droga nie została znaleziona.
         /// </summary>
         internal static string RouteNotFound {

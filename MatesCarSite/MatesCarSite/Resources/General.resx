@@ -117,34 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChargeForPassenger" xml:space="preserve">
-    <value>Opłata za pasażera</value>
+  <data name="BackToList" xml:space="preserve">
+    <value>Wróć do listy</value>
   </data>
-  <data name="Driver" xml:space="preserve">
-    <value>Kierowca</value>
-  </data>
-  <data name="EndLocation" xml:space="preserve">
-    <value>Lokacja końcowa</value>
-  </data>
-  <data name="FuelUsage" xml:space="preserve">
-    <value>Zużycie paliwa</value>
-  </data>
-  <data name="IsFullyPaid" xml:space="preserve">
-    <value>Opłacona</value>
-  </data>
-  <data name="IsPaidFalse" xml:space="preserve">
-    <value>nie</value>
-  </data>
-  <data name="IsPaidTrue" xml:space="preserve">
-    <value>tak</value>
-  </data>
-  <data name="Passengers" xml:space="preserve">
-    <value>Pasażerowie</value>
-  </data>
-  <data name="Route" xml:space="preserve">
-    <value>Droga</value>
-  </data>
-  <data name="StartLocation" xml:space="preserve">
-    <value>Lokacja startowa</value>
+  <data name="Details" xml:space="preserve">
+    <value>Szczegóły</value>
   </data>
 </root>

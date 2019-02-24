@@ -12,8 +12,11 @@ namespace MatesCarSite.ViewModels
         [Required]
         [EmailAddress(ErrorMessageResourceName = "InvalidEmail",ErrorMessageResourceType = typeof(Resources.Errors))]
         public string Email { get; set; }
+
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string PasswordConfirm { get; set; }
         [MaxLength(64,ErrorMessageResourceName = "TooLongName",ErrorMessageResourceType =typeof(Resources.Errors))]
         [Required]
         [MinLength(2)]
