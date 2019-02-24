@@ -129,20 +129,14 @@
   <data name="FuelUsage" xml:space="preserve">
     <value>Zużycie paliwa</value>
   </data>
-  <data name="IsFullyPaid" xml:space="preserve">
-    <value>Opłacona</value>
-  </data>
-  <data name="IsPaidFalse" xml:space="preserve">
-    <value>nie</value>
-  </data>
-  <data name="IsPaidTrue" xml:space="preserve">
-    <value>tak</value>
-  </data>
   <data name="Passengers" xml:space="preserve">
     <value>Pasażerowie</value>
   </data>
   <data name="Route" xml:space="preserve">
     <value>Droga</value>
+  </data>
+  <data name="RouteDateTime" xml:space="preserve">
+    <value>Data przejazdu</value>
   </data>
   <data name="StartLocation" xml:space="preserve">
     <value>Lokacja startowa</value>

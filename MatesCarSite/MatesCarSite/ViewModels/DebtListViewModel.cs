@@ -13,6 +13,7 @@ namespace MatesCarSite.ViewModels
         public List<ApplicationUser> LoanDebtorRef { get; set; }
         public float Value { get; set; }
         public Route RouteRef { get; set; }
+        public bool IsPaid { get; set; }
 
     }
 }

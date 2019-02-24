@@ -88,9 +88,9 @@ namespace MatesCarSite.Controllers
                         Driver = user,
                         EndLocation = routeViewModel.EndLocation,
                         FuelUsage = routeViewModel.FuelUsage,
-                        IsFullyPaid = routeViewModel.IsFullyPaid,
                         StartLocation = routeViewModel.StartLocation,
-                        Id = Guid.NewGuid().ToString()
+                        Id = Guid.NewGuid().ToString(),
+                        RouteDateTime = DateTime.Today
 
                     };
                     context.Routes.Add(newRoute);
@@ -108,7 +108,8 @@ namespace MatesCarSite.Controllers
                                 LoanHolderRef = user,
                                 LoanDebtorRef = passenger,
                                 RouteRef = newRoute,
-                                Value = routeViewModel.ChargeForPassenger
+                                Value = routeViewModel.ChargeForPassenger,
+                                IsPaid = false
                             });
                         }
                     }
@@ -177,8 +178,8 @@ namespace MatesCarSite.Controllers
                             EndLocation = route.EndLocation,
                             FuelUsage = route.FuelUsage,
                             Id = route.Id,
-                            IsFullyPaid = route.IsFullyPaid,
                             PassengersInRoute = userList,
+                            RouteDateTime = route.RouteDateTime,
                             StartLocation = route.StartLocation
                         };
                         return View(routeViewDetails);

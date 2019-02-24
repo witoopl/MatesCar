@@ -13,22 +13,22 @@
     <thead>
         <tr>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.Driver
+                @ColumnNamesForRoutes.Driver
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.StartLocation
+                @ColumnNamesForRoutes.StartLocation
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.EndLocation
+                @ColumnNamesForRoutes.EndLocation
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.FuelUsage
+                @ColumnNamesForRoutes.FuelUsage
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.ChargeForPassenger
+                @ColumnNamesForRoutes.ChargeForPassenger
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForRoutes.IsFullyPaid
+                @ColumnNamesForRoutes.RouteDateTime
             </th>
             <th></th>
         </tr>
@@ -52,7 +52,7 @@
                 @item.ChargeForPassenger
             </td>
             <td>
-                @item.IsFullyPaid
+                @item.RouteDateTime.ToShortDateString()
             </td>
             <td>
                 <a asp-action="Details" asp-route-routeId="@item.Id" class="btn btn-primary">@MatesCarSite.Resources.Buttons.Details</a>

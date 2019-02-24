@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForDebts.IdLoanHolder
+                @ColumnNamesForDebts.IdLoanHolder
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForDebts.Route
+                @ColumnNamesForDebts.Route
             </th>
             <th>
-                @MatesCarSite.Resources.ColumnNamesForDebts.LoanValue
+                @ColumnNamesForDebts.LoanValue
+            </th>
+            <th>
+                @ColumnNamesForDebts.IsFullyPaid
             </th>
             <th></th>
         </tr>
@@ -36,8 +39,12 @@
             <td>
                 @item.Value
             </td>
+            <td >
+                <input type="checkbox" value="@item.IsPaid" />
+            </td>
 
-            
+
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-controller="Route" asp-route-routeId="@item.RouteRef.Id">Details</a> |

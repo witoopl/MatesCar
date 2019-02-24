@@ -35,11 +35,11 @@
             @Model.ChargeForPassenger
         </dd>
         <dt class="col-sm-2">
-            @ColumnNamesForRoutes.IsFullyPaid
+            @ColumnNamesForRoutes.RouteDateTime
         </dt>
         <dd class="col-sm-10">
-            @(Model.IsFullyPaid ? ColumnNamesForRoutes.IsPaidTrue :  ColumnNamesForRoutes.IsPaidFalse)
-        </dd> 
+            @Model.RouteDateTime.ToShortDateString()
+        </dd>
     </dl>
     
     <b>@ColumnNamesForRoutes.Passengers</b>

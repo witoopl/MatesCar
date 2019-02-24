@@ -21,6 +21,9 @@
             <th>
                 @MatesCarSite.Resources.ColumnNamesForDebts.LoanValue
             </th>
+            <th>
+                @ColumnNamesForDebts.IsFullyPaid
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -36,8 +39,13 @@
             <td>
                 @item.Value
             </td>
+            <td>
+                
+                @(item.IsPaid ? ColumnNamesForDebts.IsPaidTrue : ColumnNamesForDebts.IsPaidFalse)
+            </td>
 
-            
+
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-controller="Route" asp-route-routeId="@item.RouteRef.Id">Details</a> |

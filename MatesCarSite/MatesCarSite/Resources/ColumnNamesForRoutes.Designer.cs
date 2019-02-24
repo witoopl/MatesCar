@@ -97,33 +97,6 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opłacona.
-        /// </summary>
-        public static string IsFullyPaid {
-            get {
-                return ResourceManager.GetString("IsFullyPaid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to nie.
-        /// </summary>
-        public static string IsPaidFalse {
-            get {
-                return ResourceManager.GetString("IsPaidFalse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to tak.
-        /// </summary>
-        public static string IsPaidTrue {
-            get {
-                return ResourceManager.GetString("IsPaidTrue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pasażerowie.
         /// </summary>
         public static string Passengers {
@@ -138,6 +111,15 @@ namespace MatesCarSite.Resources {
         public static string Route {
             get {
                 return ResourceManager.GetString("Route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data przejazdu.
+        /// </summary>
+        public static string RouteDateTime {
+            get {
+                return ResourceManager.GetString("RouteDateTime", resourceCulture);
             }
         }
         

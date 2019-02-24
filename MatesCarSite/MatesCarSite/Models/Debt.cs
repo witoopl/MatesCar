@@ -17,6 +17,7 @@ namespace MatesCarSite.Models
         [Required]
         public float Value { get; set; }
         public Route RouteRef { get; set; }
+        public bool IsPaid { get; set; }
         
 
 

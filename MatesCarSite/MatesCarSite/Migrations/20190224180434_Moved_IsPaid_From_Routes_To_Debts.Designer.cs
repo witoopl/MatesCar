@@ -4,14 +4,16 @@ using MatesCarSite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MatesCarSite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190224180434_Moved_IsPaid_From_Routes_To_Debts")]
+    partial class Moved_IsPaid_From_Routes_To_Debts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,8 +144,6 @@ namespace MatesCarSite.Migrations
                         .IsRequired();
 
                     b.Property<float>("FuelUsage");
-
-                    b.Property<DateTime>("RouteDateTime");
 
                     b.Property<string>("StartLocation")
                         .IsRequired();

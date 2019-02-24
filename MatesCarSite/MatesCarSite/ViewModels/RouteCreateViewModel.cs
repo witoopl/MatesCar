@@ -1,13 +1,14 @@
 ﻿using MatesCarSite.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MatesCarSite.ViewModels
 {
-    public class RouteCreateViewModel 
+    public class RouteCreateViewModel
     {
 
-        [Required(ErrorMessageResourceName = "StartLocation" ,ErrorMessageResourceType = typeof(Resources.Errors))]
+        [Required(ErrorMessageResourceName = "StartLocation", ErrorMessageResourceType = typeof(Resources.Errors))]
         public string StartLocation { get; set; }
         [Required(ErrorMessageResourceName = "EndLocation", ErrorMessageResourceType = typeof(Resources.Errors))]
         public string EndLocation { get; set; }
@@ -17,7 +18,7 @@ namespace MatesCarSite.ViewModels
         public List<ApplicationUser> Passengers { get; set; }
         [Required(ErrorMessageResourceName = "ChargeForPassenger", ErrorMessageResourceType = typeof(Resources.Errors))]
         public float ChargeForPassenger { get; set; }
-        public bool IsFullyPaid { get; set; }
-        
+        public DateTime RouteDateTime { get; set; }
+
     }
 }

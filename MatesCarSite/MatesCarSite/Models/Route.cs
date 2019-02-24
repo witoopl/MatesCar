@@ -21,8 +21,7 @@ namespace MatesCarSite.Models
         public float FuelUsage { get; set; }
         [Required]
         public float ChargeForPassenger { get; set; }
-        [Required]
-        public bool IsFullyPaid { get; set; }
+        public DateTime RouteDateTime { get; set; }
         
         
     }

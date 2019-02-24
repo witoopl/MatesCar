@@ -88,6 +88,33 @@ namespace MatesCarSite.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Opłacona.
+        /// </summary>
+        public static string IsFullyPaid {
+            get {
+                return ResourceManager.GetString("IsFullyPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to nie.
+        /// </summary>
+        public static string IsPaidFalse {
+            get {
+                return ResourceManager.GetString("IsPaidFalse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tak.
+        /// </summary>
+        public static string IsPaidTrue {
+            get {
+                return ResourceManager.GetString("IsPaidTrue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wartość długu.
         /// </summary>
         public static string LoanValue {

@@ -126,6 +126,15 @@
   <data name="IdLoanHolder" xml:space="preserve">
     <value>Wierzyciel</value>
   </data>
+  <data name="IsFullyPaid" xml:space="preserve">
+    <value>Opłacona</value>
+  </data>
+  <data name="IsPaidFalse" xml:space="preserve">
+    <value>nie</value>
+  </data>
+  <data name="IsPaidTrue" xml:space="preserve">
+    <value>tak</value>
+  </data>
   <data name="LoanValue" xml:space="preserve">
     <value>Wartość długu</value>
   </data>
