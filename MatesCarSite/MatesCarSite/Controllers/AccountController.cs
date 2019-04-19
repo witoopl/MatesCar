@@ -35,7 +35,13 @@ namespace MatesCarSite.Controllers
             ViewBag.returnUrl = returnUrl;
             return View();
         }
-
+        /// <summary>
+        /// Recives login details and url from which user was redirected and attemps to login a user.
+        /// In case of fail specific error is displayed.
+        /// </summary>
+        /// <param name="details">Login details provided by the model</param>
+        /// <param name="returnUrl">Url from which user was redirected</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
